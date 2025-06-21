@@ -178,27 +178,58 @@ class TrainingWorker(QThread):
             return False
     
     def _execute_training(self):
-        """執行訓練過程"""
+        """執行訓練過程（實際呼叫 YOLOv5/YOLO-PCB train.py）"""
+        import subprocess
         try:
             epochs = self.params['epochs']
             batch_size = self.params['batch_size']
-            
-            self.log_message.emit(f"開始訓練 - Epochs: {epochs}, Batch Size: {batch_size}")
-            
-            # 創建輸出目錄
+            data = self.params['data']
+            cfg = self.params.get('cfg', 'yolov5s.yaml')
+            weights = self.params.get('weights', 'yolov5s.pt')
+            device = self.params.get('device', 'cpu')
             project = self.params.get('project', 'runs/train')
             name = self.params.get('name', 'exp')
-            output_dir = os.path.join(project, name)
-            os.makedirs(output_dir, exist_ok=True)
-            
-            # 保存訓練配置
-            config_file = os.path.join(output_dir, 'training_config.json')
-            with open(config_file, 'w', encoding='utf-8') as f:
-                json.dump(self.params, f, indent=2, ensure_ascii=False)
-            
-            # 模擬訓練過程（實際實現需要根據具體的YOLOv5版本調整）
-            self._simulate_training(epochs, output_dir)
-            
+            img_size = self.params.get('img_size', 640)
+            # 其他參數可依需求擴充
+
+            # train.py 路徑（假設與本專案同目錄或請自行調整）
+            train_script = os.path.join(os.getcwd(), 'train.py')
+            if not os.path.exists(train_script):
+                self.error_occurred.emit(f"找不到 train.py: {train_script}")
+                return
+
+            cmd = [
+                sys.executable, train_script,
+                '--data', data,
+                '--cfg', cfg,
+                '--weights', weights,
+                '--epochs', str(epochs),
+                '--batch-size', str(batch_size),
+                '--device', device,
+                '--project', project,
+                '--name', name,
+                '--img', str(img_size)
+            ]
+
+            self.log_message.emit(f"執行訓練指令: {' '.join(cmd)}")
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+            try:
+                for line in process.stdout:
+                    if line:
+                        self.log_message.emit(line.rstrip())
+                process.wait()
+            except Exception as sub_err:
+                self.error_occurred.emit(f"訓練過程讀取失敗: {str(sub_err)}")
+                return
+
+            if process.returncode == 0:
+                model_path = os.path.join(project, name, 'weights', 'best.pt')
+                self.training_finished.emit(model_path)
+                self.log_message.emit(f"訓練完成！最佳模型保存至: {model_path}")
+            else:
+                self.error_occurred.emit(f"訓練過程出現錯誤，return code: {process.returncode}")
+        except KeyError as key_err:
+            self.error_occurred.emit(f"訓練參數缺失: {str(key_err)}")
         except Exception as e:
             self.error_occurred.emit(f"訓練執行失敗: {str(e)}")
     
