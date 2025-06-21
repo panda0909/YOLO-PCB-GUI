@@ -18,6 +18,20 @@ from yolo_gui_utils.simple_yolo_loader_v2 import YOLOv5Loader
 
 
 class DetectionWorker(QThread):
+
+    @staticmethod
+    def detect_available_cameras(max_devices=5):
+        """自動偵測可用攝像頭，回傳可用攝像頭ID清單"""
+        import cv2
+        available = []
+        for cam_id in range(max_devices):
+            cap = cv2.VideoCapture(cam_id, cv2.CAP_DSHOW)
+            if cap is not None and cap.isOpened():
+                ret, frame = cap.read()
+                if ret and frame is not None:
+                    available.append(cam_id)
+                cap.release()
+        return available
     """檢測工作執行緒"""
     
     # 信號定義
@@ -205,41 +219,36 @@ class DetectionWorker(QThread):
             
     def _detect_camera(self, camera_id):
         """檢測攝像頭"""
+        import cv2
         try:
-            self.log_message.emit(f"正在開啟攝像頭: {camera_id}")
-            
-            self.camera = cv2.VideoCapture(camera_id, cv2.CAP_DSHOW)
+            self.log_message.emit(f"[CAMERA] 嘗試開啟攝像頭: {camera_id}")
+            self.camera = cv2.VideoCapture(int(camera_id), cv2.CAP_DSHOW)
             if not self.camera.isOpened():
+                self.log_message.emit(f"[CAMERA] 攝像頭開啟失敗: {camera_id}")
                 self.error_occurred.emit(f"無法開啟攝像頭: {camera_id}")
                 return
-            
+            self.log_message.emit(f"[CAMERA] 攝像頭開啟成功: {camera_id}")
             frame_count = 0
-            
             while self.running and self.camera.isOpened():
                 ret, frame = self.camera.read()
                 if not ret:
-                    self.error_occurred.emit("無法從攝像頭讀取畫面")
-                    break
-                
+                    self.log_message.emit(f"[CAMERA] 讀取影像幀失敗 (ret=False)，frame_count={frame_count}")
+                    continue
+                if frame is None:
+                    self.log_message.emit(f"[CAMERA] frame is None，frame_count={frame_count}")
+                    continue
                 # 檢查停止條件
                 if not self.running:
-                    self.log_message.emit("檢測被用戶中斷")
+                    self.log_message.emit("[CAMERA] 檢測被用戶中斷")
                     break
-                
                 # 幀跳過機制，降低UI負載
                 self.frame_counter += 1
                 if self.frame_counter % self.frame_skip != 0:
-                    self.msleep(33)  # 保持檢測頻率，但跳過顯示
+                    self.msleep(33)
                     continue
-                
                 try:
-                    # 執行檢測
                     results = self._inference(frame)
-                    
-                    # 在worker線程準備顯示圖像
                     display_pixmap = self._prepare_display_image(frame, results)
-                    
-                    # 發送結果
                     if display_pixmap:
                         self.frame_processed.emit(display_pixmap)
                     self.detection_result.emit({
@@ -247,29 +256,23 @@ class DetectionWorker(QThread):
                         'detections': results,
                         'count': len(results) if results else 0
                     })
-                    
+                    self.log_message.emit(f"[CAMERA] 成功取得影像幀: {frame_count}")
                 except Exception as frame_error:
-                    # 單幀處理失敗不應該中斷整個檢測流程
-                    self.log_message.emit(f"幀 {frame_count} 處理失敗: {str(frame_error)}")
-                    # 顯示原始幀（無標註）
+                    self.log_message.emit(f"[CAMERA] 幀 {frame_count} 處理失敗: {str(frame_error)}")
                     display_pixmap = self._prepare_display_image(frame, None)
                     if display_pixmap:
                         self.frame_processed.emit(display_pixmap)
-                
                 frame_count += 1
-                
-                # 控制幀率（減少CPU使用率）
-                self.msleep(33)  # ~30 FPS
-              # 清理資源
+                self.msleep(33)
+            self.log_message.emit(f"[CAMERA] 偵測結束，總共取得幀數: {frame_count}")
             if self.camera:
                 self.camera.release()
                 self.camera = None
-                self.log_message.emit("攝像頭已釋放")
-                
+                self.log_message.emit("[CAMERA] 攝像頭已釋放")
         except Exception as e:
+            self.log_message.emit(f"[CAMERA] 攝像頭檢測失敗: {str(e)}")
             self.error_occurred.emit(f"攝像頭檢測失敗: {str(e)}")
         finally:
-            # 確保攝像頭被釋放
             if hasattr(self, 'camera') and self.camera:
                 self.camera.release()
                 self.camera = None

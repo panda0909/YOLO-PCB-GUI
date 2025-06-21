@@ -86,10 +86,20 @@ class DetectTab(QWidget):
         self.source_input.setPlaceholderText("攝像頭ID (通常為 0)")
         self.source_input.setText("0")  # 預設為 0
         self.browse_source_btn = QPushButton("瀏覽...")
+        self.detect_camera_btn = QPushButton("自動偵測攝像頭")
+        self.camera_list_combo = QComboBox()
+        self.camera_list_combo.setEditable(False)
+        self.camera_list_combo.setMinimumWidth(80)
+        self.camera_list_combo.addItem("未偵測")
+        self.camera_list_combo.currentIndexChanged.connect(self.on_camera_selected)
+        self.detect_camera_btn.clicked.connect(self.on_detect_camera_clicked)
 
         layout.addWidget(self.source_label, 0, 0)
         layout.addWidget(self.source_input, 0, 1)
         layout.addWidget(self.browse_source_btn, 0, 2)
+        layout.addWidget(self.detect_camera_btn, 1, 2)
+        layout.addWidget(QLabel("可用攝像頭:"), 1, 0)
+        layout.addWidget(self.camera_list_combo, 1, 1)
 
         # 輸入類型選擇
         self.input_type_label = QLabel("輸入類型:")
@@ -97,11 +107,11 @@ class DetectTab(QWidget):
         self.input_type_combo.addItems(["自動檢測", "圖片", "影片", "資料夾", "攝像頭"])
         self.input_type_combo.setCurrentText("攝像頭")  # 預設為攝像頭
 
-        layout.addWidget(self.input_type_label, 1, 0)
-        layout.addWidget(self.input_type_combo, 1, 1)
+        layout.addWidget(self.input_type_label, 2, 0)
+        layout.addWidget(self.input_type_combo, 2, 1)
         
         parent_layout.addWidget(group)
-        
+
     def create_model_group(self, parent_layout):
         """創建模型設定群組"""
         group = QGroupBox("模型設定")
@@ -953,3 +963,24 @@ class DetectTab(QWidget):
             event.accept()
         else:
             super().keyPressEvent(event)
+
+    def on_detect_camera_clicked(self):
+        """自動偵測可用攝像頭，並更新下拉選單"""
+        from core.detector import DetectionWorker
+        available = DetectionWorker.detect_available_cameras(5)
+        self.camera_list_combo.clear()
+        if available:
+            for cam_id in available:
+                self.camera_list_combo.addItem(str(cam_id))
+            self.add_log(f"自動偵測到可用攝像頭: {available}")
+            self.camera_list_combo.setCurrentIndex(0)
+            self.source_input.setText(str(available[0]))
+        else:
+            self.camera_list_combo.addItem("無可用攝像頭")
+            self.add_log("未偵測到可用攝像頭")
+
+    def on_camera_selected(self, idx):
+        """選擇攝像頭時自動填入來源欄位"""
+        cam_id = self.camera_list_combo.currentText()
+        if cam_id.isdigit():
+            self.source_input.setText(cam_id)

@@ -375,3 +375,64 @@
 2025-06-21 21:14:47,323 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
 2025-06-21 21:14:47,324 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
 2025-06-21 21:14:47,325 - gui.main_window - INFO - 主視窗正常關閉
+2025-06-21 21:16:22,346 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 21:16:22,982 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 21:16:22,982 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 21:16:23,016 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 21:16:23,016 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 21:16:23,024 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 21:16:23,025 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 21:16:23,025 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 21:16:23,026 - gui.main_window - INFO - 設定載入完成
+2025-06-21 21:16:23,026 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 21:16:23,026 - main - INFO - 應用程式初始化完成
+2025-06-21 21:16:25,042 - main - INFO - 主視窗已顯示
+2025-06-21 21:17:05,482 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:17:43,405 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:17:49,253 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:17:53,880 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:18:01,988 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:18:17,288 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:18:26,646 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:19:32,570 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:19:50,752 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:20:05,660 - utils.torch_utils - INFO - Model Summary: 284 layers, 8913283 parameters, 0 gradients, 20.1 GFLOPS
+2025-06-21 21:20:24,707 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 21:20:26,358 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 21:20:40,512 - gui.main_window - INFO - 切換到頁籤: 測試
+2025-06-21 21:20:41,041 - gui.main_window - INFO - 切換到頁籤: 訓練
+2025-06-21 21:20:42,638 - gui.main_window - INFO - 切換到頁籤: 測試
+2025-06-21 21:20:43,111 - gui.main_window - INFO - 切換到頁籤: 檢測
+2025-06-21 21:21:02,932 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 21:29:33,396 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 21:29:33,998 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 21:29:33,999 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 21:29:34,027 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 21:29:34,028 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 21:29:34,045 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 21:29:34,047 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 21:29:34,049 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 21:29:34,050 - gui.main_window - INFO - 設定載入完成
+2025-06-21 21:29:34,053 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 21:29:34,054 - main - INFO - 應用程式初始化完成
+2025-06-21 21:29:36,107 - main - INFO - 主視窗已顯示
+2025-06-21 21:29:44,809 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 21:31:18,819 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
+2025-06-21 21:31:18,820 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
+2025-06-21 21:31:18,820 - gui.main_window - INFO - 主視窗正常關閉
+2025-06-21 21:36:26,068 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 21:36:26,622 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 21:36:26,622 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 21:36:26,649 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 21:36:26,649 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 21:36:26,657 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 21:36:26,658 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 21:36:26,658 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 21:36:26,658 - gui.main_window - INFO - 設定載入完成
+2025-06-21 21:36:26,658 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 21:36:26,658 - main - INFO - 應用程式初始化完成
+2025-06-21 21:36:28,702 - main - INFO - 主視窗已顯示
+2025-06-21 21:36:46,892 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 21:37:03,059 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
+2025-06-21 21:37:03,059 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
+2025-06-21 21:37:03,060 - gui.main_window - INFO - 主視窗正常關閉
