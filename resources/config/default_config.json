@@ -1,0 +1,30 @@
+{
+  "app": {
+    "window_geometry": [
+      100,
+      100,
+      1200,
+      800
+    ],
+    "theme": "default",
+    "language": "zh_TW"
+  },
+  "detection": {
+    "confidence_threshold": 0.25,
+    "iou_threshold": 0.45,
+    "image_size": 640,
+    "device": "auto",
+    "default_weights": "yolov5s.pt"
+  },
+  "training": {
+    "epochs": 300,
+    "batch_size": 16,
+    "learning_rate": 0.01,
+    "device": "auto"
+  },
+  "testing": {
+    "batch_size": 32,
+    "save_results": true,
+    "device": "auto"
+  }
+}

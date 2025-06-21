@@ -1,0 +1,53 @@
+# YOLO-PCB GUI 應用程式依賴
+# 基礎GUI框架
+PyQt5>=5.15.2
+
+# 深度學習框架
+torch>=1.12.0
+torchvision>=0.13.0
+
+# 影像處理
+opencv-python>=4.5.0
+Pillow>=8.3.0
+
+# 數值計算和資料處理
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# 配置文件處理
+PyYAML>=6.0
+pyyaml>=6.0
+
+# 進度條和工具
+tqdm>=4.62.0
+
+# 科學計算
+scipy>=1.7.0
+
+# 系統監控（可選）
+psutil>=5.8.0
+
+# 測試框架（開發用）
+pytest>=6.2.0
+pytest-qt>=4.0.0
+
+# 代碼格式化（開發用）
+black>=21.0.0
+pylint>=2.12.0
+
+# 打包工具（部署用）
+pyinstaller>=4.8
+cx-Freeze>=6.8
+
+# 額外的機器學習工具（可選）
+scikit-learn>=1.0.0
+plotly>=5.0.0
+
+# YOLO相關（如果需要特定版本）
+ultralytics>=8.0.0
+
+# 其他實用工具
+pathlib2>=2.3.0
+argparse>=1.4.0

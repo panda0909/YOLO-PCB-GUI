@@ -1,0 +1,71 @@
+{
+    "app": {
+        "name": "YOLO-PCB GUI",
+        "version": "1.0.0",
+        "window_geometry": [
+            90,
+            -93,
+            1519,
+            999
+        ],
+        "theme": "default",
+        "language": "zh-TW"
+    },
+    "detection": {
+        "confidence_threshold": 0.7,
+        "iou_threshold": 0.45,
+        "image_size": 640,
+        "device": "auto",
+        "save_results": true,
+        "show_labels": true,
+        "line_thickness": 3,
+        "font_size": 12
+    },
+    "training": {
+        "epochs": 100,
+        "batch_size": 16,
+        "learning_rate": 0.01,
+        "image_size": 608,
+        "workers": 4,
+        "device": "auto",
+        "cache": false,
+        "save_period": 10,
+        "patience": 20
+    },
+    "testing": {
+        "batch_size": 32,
+        "image_size": 608,
+        "confidence_threshold": 0.001,
+        "iou_threshold": 0.6,
+        "save_results": true,
+        "save_txt": true,
+        "save_json": false,
+        "verbose": true
+    },
+    "paths": {
+        "weights_dir": "../weights",
+        "data_dir": "../data",
+        "results_dir": "./results",
+        "models_dir": "../models",
+        "default_weights": "../weights/baseline_fpn_loss.pt",
+        "default_data": "../data/PCB.yaml"
+    },
+    "camera": {
+        "default_id": 0,
+        "width": 640,
+        "height": 480,
+        "fps": 30,
+        "backend": "auto",
+        "buffer_size": 1
+    },
+    "ui": {
+        "show_toolbar": true,
+        "show_statusbar": true,
+        "auto_save_config": true,
+        "confirm_exit": true,
+        "recent_files_count": 10
+    },
+    "test": {
+        "value": "hello"
+    }
+}
