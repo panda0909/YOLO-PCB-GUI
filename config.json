@@ -3,8 +3,8 @@
         "name": "YOLO-PCB GUI",
         "version": "1.0.0",
         "window_geometry": [
-            81,
-            0,
+            64,
+            -93,
             1519,
             999
         ],

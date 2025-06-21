@@ -13,9 +13,16 @@ from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
 from PyQt5.QtCore import Qt, pyqtSignal, QThread, pyqtSlot, QTimer
 from PyQt5.QtGui import QPixmap, QFont, QKeySequence
 import numpy as np
+from core.camera_worker import CameraWorker
+from core.analyze_worker import AnalyzeWorker
 
 
 class DetectTab(QWidget):
+
+    @pyqtSlot(str)
+    def on_camera_error(self, msg):
+        """處理攝像頭擷取錯誤"""
+        self.add_log(f"[CAMERA] {msg}")
     """檢測功能頁籤"""
     
     # 信號定義
@@ -29,7 +36,9 @@ class DetectTab(QWidget):
         self.current_source = ""
         self.current_weights = ""
         self.output_dir = ""
-        
+        self.camera_worker = None
+        self.analyze_worker = None
+        self.is_camera_running = False
         self.init_ui()
         self.connect_signals()
         # ESC鍵中斷攝像頭檢測快捷鍵
@@ -236,13 +245,11 @@ class DetectTab(QWidget):
         parent_layout.addWidget(group)
         
     def create_control_group(self, parent_layout):
-        """創建控制群組"""
+        """創建控制群組（合併所有控制按鈕與功能）"""
         group = QGroupBox("檢測控制")
-        layout = QVBoxLayout(group)
-        
-        # 按鈕區域
-        button_layout = QHBoxLayout()
-        
+        layout = QHBoxLayout(group)
+        button_layout = QVBoxLayout()
+
         self.detect_btn = QPushButton("開始檢測")
         self.detect_btn.setMinimumHeight(40)
         self.detect_btn.setStyleSheet("""
@@ -265,7 +272,7 @@ class DetectTab(QWidget):
                 color: #666666;
             }
         """)
-        
+
         self.stop_btn = QPushButton("停止檢測")
         self.stop_btn.setMinimumHeight(40)
         self.stop_btn.setEnabled(False)
@@ -289,30 +296,38 @@ class DetectTab(QWidget):
                 color: #666666;
             }
         """)
-        
+
         self.clear_btn = QPushButton("清除設定")
         self.clear_btn.setMinimumHeight(40)
-        
+        self.clear_btn.setVisible(False)
+        self.clear_btn.setEnabled(False)
+
+        self.btn_start_camera = QPushButton("開始攝像頭分析")
+        self.btn_stop_camera = QPushButton("停止攝像頭分析")
+        self.btn_stop_camera.setEnabled(False)
+        self.btn_start_camera.setMinimumHeight(40)
+        self.btn_stop_camera.setMinimumHeight(40)
+
         button_layout.addWidget(self.detect_btn)
         button_layout.addWidget(self.stop_btn)
         button_layout.addWidget(self.clear_btn)
-        
-        # 進度條
+        button_layout.addWidget(self.btn_start_camera)
+        button_layout.addWidget(self.btn_stop_camera)
+
         self.progress_label = QLabel("就緒")
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
-          # 日誌輸出 - 調整高度讓左側更緊湊
         self.log_text = QTextEdit()
-        self.log_text.setMaximumHeight(120)  # 減少日誌區域高度
-        self.log_text.setMinimumHeight(80)   # 設置最小高度
+        self.log_text.setMaximumHeight(120)
+        self.log_text.setMinimumHeight(80)
         self.log_text.setPlaceholderText("檢測日誌將顯示在此...")
         font = QFont("Consolas", 9)
         self.log_text.setFont(font)
+
         layout.addLayout(button_layout)
         layout.addWidget(self.progress_label)
         layout.addWidget(self.progress_bar)
         layout.addWidget(self.log_text)
-        
         parent_layout.addWidget(group)
     def create_image_display_group(self, parent_layout):
         """創建圖像顯示群組"""
@@ -415,14 +430,16 @@ class DetectTab(QWidget):
         self.detect_btn.clicked.connect(self.start_detection)
         self.stop_btn.clicked.connect(self.stop_detection)
         self.clear_btn.clicked.connect(self.clear_settings)
-        
+        self.btn_start_camera.clicked.connect(self.start_camera_analysis)
+        self.btn_stop_camera.clicked.connect(self.stop_camera_analysis)
+
         # 組合框信號
         self.input_type_combo.currentTextChanged.connect(self.on_input_type_changed)
-        
+
         # 初始化檢測工作器為None，在需要時才創建
         self.detection_worker = None
         self.add_log("信號連接完成，檢測器將在開始檢測時初始化")
-        
+
         # 連接圖像顯示器信號
         if hasattr(self, 'image_viewer'):
             self.image_viewer.image_clicked.connect(self.on_image_clicked)
@@ -984,3 +1001,161 @@ class DetectTab(QWidget):
         cam_id = self.camera_list_combo.currentText()
         if cam_id.isdigit():
             self.source_input.setText(cam_id)
+    
+    def create_control_group(self, parent_layout):
+        """創建控制群組（合併所有控制按鈕與功能）"""
+        group = QGroupBox("檢測控制")
+        layout = QHBoxLayout(group)
+        button_layout = QVBoxLayout()
+
+        self.detect_btn = QPushButton("開始檢測")
+        self.detect_btn.setMinimumHeight(40)
+        self.detect_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+            QPushButton:pressed {
+                background-color: #3d8b40;
+            }
+            QPushButton:disabled {
+                background-color: #cccccc;
+                color: #666666;
+            }
+        """)
+
+        self.stop_btn = QPushButton("停止檢測")
+        self.stop_btn.setMinimumHeight(40)
+        self.stop_btn.setEnabled(False)
+        self.stop_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #f44336;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #da190b;
+            }
+            QPushButton:pressed {
+                background-color: #c3150a;
+            }
+            QPushButton:disabled {
+                background-color: #cccccc;
+                color: #666666;
+            }
+        """)
+
+        self.clear_btn = QPushButton("清除設定")
+        self.clear_btn.setMinimumHeight(40)
+        self.clear_btn.setVisible(False)
+        self.clear_btn.setEnabled(False)
+
+        self.btn_start_camera = QPushButton("開始攝像頭分析")
+        self.btn_stop_camera = QPushButton("停止攝像頭分析")
+        self.btn_stop_camera.setEnabled(False)
+        self.btn_start_camera.setMinimumHeight(40)
+        self.btn_stop_camera.setMinimumHeight(40)
+
+        button_layout.addWidget(self.detect_btn)
+        button_layout.addWidget(self.stop_btn)
+        button_layout.addWidget(self.clear_btn)
+        button_layout.addWidget(self.btn_start_camera)
+        button_layout.addWidget(self.btn_stop_camera)
+
+        self.progress_label = QLabel("就緒")
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setVisible(False)
+        self.log_text = QTextEdit()
+        self.log_text.setMaximumHeight(120)
+        self.log_text.setMinimumHeight(80)
+        self.log_text.setPlaceholderText("檢測日誌將顯示在此...")
+        font = QFont("Consolas", 9)
+        self.log_text.setFont(font)
+
+        layout.addLayout(button_layout)
+        layout.addWidget(self.progress_label)
+        layout.addWidget(self.progress_bar)
+        layout.addWidget(self.log_text)
+        parent_layout.addWidget(group)
+
+    def start_camera_analysis(self):
+        if self.is_camera_running:
+            self.add_log("攝像頭已在運行")
+            return
+        try:
+            cam_id = int(self.source_input.text())
+        except Exception:
+            self.add_log("來源欄位不是有效的攝像頭ID")
+            return
+        self.camera_worker = CameraWorker(camera_id=cam_id, fps=1)
+        self.camera_worker.frame_captured.connect(self.on_camera_frame)
+        self.camera_worker.error_occurred.connect(self.on_camera_error)
+        # 初始化分析 worker，這裡假設有一個 yolo_infer(frame) 可用
+        from core.detector import DetectionWorker
+        self.analyze_worker = AnalyzeWorker(self.yolo_infer)
+        self.analyze_worker.analysis_done.connect(self.on_analysis_done)
+        self.analyze_worker.error_occurred.connect(self.on_analyze_error)
+        self.camera_worker.start()
+        self.is_camera_running = True
+        self.btn_start_camera.setEnabled(False)
+        self.btn_stop_camera.setEnabled(True)
+        self.add_log(f"啟動攝像頭分析 (ID={cam_id})")
+
+    def stop_camera_analysis(self):
+        if self.camera_worker:
+            self.camera_worker.stop()
+            self.camera_worker = None
+        if self.analyze_worker:
+            self.analyze_worker.stop()
+            self.analyze_worker = None
+        self.is_camera_running = False
+        self.btn_start_camera.setEnabled(True)
+        self.btn_stop_camera.setEnabled(False)
+        self.add_log("已停止攝像頭分析")
+
+    @pyqtSlot(object)
+    def on_camera_frame(self, frame):
+        # frame 送進分析 thread
+        if self.analyze_worker:
+            self.analyze_worker.analyze(frame)
+
+    @pyqtSlot(object, object)
+    def on_analysis_done(self, frame, result):
+        try:
+            from gui.widgets.image_viewer import AnnotatedImageViewer
+            if hasattr(self, 'image_viewer') and isinstance(self.image_viewer, AnnotatedImageViewer):
+                # 假設 result 是偵測結果，set_image 可顯示 frame，set_detections 可顯示標註
+                self.image_viewer.set_image(frame)
+                if hasattr(self.image_viewer, 'set_detections'):
+                    self.image_viewer.set_detections(result)
+            else:
+                self.add_log("未找到 image_viewer 實例，無法顯示分析結果")
+        except Exception as e:
+            self.add_log(f"顯示分析結果失敗: {str(e)}")
+
+    @pyqtSlot(str)
+    def on_analyze_error(self, msg):
+        self.add_log(f"[ANALYZE] {msg}")
+
+    def yolo_infer(self, frame):
+        # 這裡可根據實際模型推論流程調整
+        # 範例：直接呼叫 DetectionWorker 的推論方法
+        # 實際專案可改為單例或全域模型物件
+        try:
+            from core.detector import DetectionWorker
+            worker = DetectionWorker()
+            worker.load_model(self.weights_input.text(), device=self.device_combo.currentText())
+            return worker._inference(frame)
+        except Exception as e:
+            self.add_log(f"推論失敗: {str(e)}")
+            return []

@@ -436,3 +436,145 @@
 2025-06-21 21:37:03,059 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
 2025-06-21 21:37:03,059 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
 2025-06-21 21:37:03,060 - gui.main_window - INFO - 主視窗正常關閉
+2025-06-21 21:52:21,351 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 21:52:22,095 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 21:52:22,097 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 21:52:22,101 - gui.main_window - ERROR - 初始化頁籤失敗: 'DetectTab' object has no attribute 'detect_btn'
+2025-06-21 21:52:22,102 - gui.main_window - WARNING - 使用佔位頁籤替代正常功能頁籤
+2025-06-21 21:52:22,114 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 21:52:22,114 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 21:52:22,115 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 21:52:22,115 - gui.main_window - INFO - 設定載入完成
+2025-06-21 21:52:22,115 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 21:52:22,115 - main - INFO - 應用程式初始化完成
+2025-06-21 21:52:24,197 - main - INFO - 主視窗已顯示
+2025-06-21 21:52:41,099 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
+2025-06-21 21:52:41,100 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
+2025-06-21 21:52:41,100 - gui.main_window - INFO - 主視窗正常關閉
+2025-06-21 21:58:29,247 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 21:58:29,855 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 21:58:29,856 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 21:58:29,862 - gui.main_window - ERROR - 初始化頁籤失敗: 'DetectTab' object has no attribute 'stop_btn'
+2025-06-21 21:58:29,863 - gui.main_window - WARNING - 使用佔位頁籤替代正常功能頁籤
+2025-06-21 21:58:29,872 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 21:58:29,873 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 21:58:29,874 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 21:58:29,874 - gui.main_window - INFO - 設定載入完成
+2025-06-21 21:58:29,874 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 21:58:29,875 - main - INFO - 應用程式初始化完成
+2025-06-21 21:58:31,931 - main - INFO - 主視窗已顯示
+2025-06-21 22:04:20,211 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
+2025-06-21 22:04:20,212 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
+2025-06-21 22:04:20,212 - gui.main_window - INFO - 主視窗正常關閉
+2025-06-21 22:04:23,939 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:04:24,611 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:04:24,621 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:04:24,626 - gui.main_window - ERROR - 初始化頁籤失敗: 'DetectTab' object has no attribute 'clear_btn'
+2025-06-21 22:04:24,627 - gui.main_window - WARNING - 使用佔位頁籤替代正常功能頁籤
+2025-06-21 22:04:24,636 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:04:24,637 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:04:24,638 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:04:24,638 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:04:24,638 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:04:24,639 - main - INFO - 應用程式初始化完成
+2025-06-21 22:04:26,686 - main - INFO - 主視窗已顯示
+2025-06-21 22:09:33,241 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:09:33,881 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:09:33,881 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:09:33,886 - gui.main_window - ERROR - 初始化頁籤失敗: 'DetectTab' object has no attribute 'clear_btn'
+2025-06-21 22:09:33,886 - gui.main_window - WARNING - 使用佔位頁籤替代正常功能頁籤
+2025-06-21 22:09:33,896 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:09:33,897 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:09:33,899 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:09:33,900 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:09:33,900 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:09:33,900 - main - INFO - 應用程式初始化完成
+2025-06-21 22:09:35,966 - main - INFO - 主視窗已顯示
+2025-06-21 22:13:17,297 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:13:17,857 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:13:17,858 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:13:17,863 - gui.main_window - ERROR - 初始化頁籤失敗: 'DetectTab' object has no attribute 'clear_btn'
+2025-06-21 22:13:17,864 - gui.main_window - WARNING - 使用佔位頁籤替代正常功能頁籤
+2025-06-21 22:13:17,871 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:13:17,872 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:13:17,873 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:13:17,873 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:13:17,873 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:13:17,873 - main - INFO - 應用程式初始化完成
+2025-06-21 22:13:19,938 - main - INFO - 主視窗已顯示
+2025-06-21 22:18:14,476 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:18:15,126 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:18:15,127 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:18:15,149 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 22:18:15,149 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 22:18:15,159 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:18:15,159 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:18:15,160 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:18:15,160 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:18:15,160 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:18:15,160 - main - INFO - 應用程式初始化完成
+2025-06-21 22:18:17,221 - main - INFO - 主視窗已顯示
+2025-06-21 22:18:36,628 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:19:42,820 - yolo_gui_utils.config_manager - INFO - 保存配置檔案: config.json
+2025-06-21 22:19:42,821 - yolo_gui_utils.config_manager - INFO - 配置檔案保存成功
+2025-06-21 22:19:42,822 - gui.main_window - INFO - 主視窗正常關閉
+2025-06-21 22:19:55,141 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:19:55,940 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:19:55,951 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:19:55,983 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 22:19:55,983 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 22:19:55,992 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:19:55,992 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:19:55,993 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:19:55,993 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:19:55,993 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:19:55,994 - main - INFO - 應用程式初始化完成
+2025-06-21 22:19:58,012 - main - INFO - 主視窗已顯示
+2025-06-21 22:23:09,597 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:23:10,302 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:23:10,302 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:23:10,326 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 22:23:10,327 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 22:23:10,335 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:23:10,336 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:23:10,337 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:23:10,337 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:23:10,337 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:23:10,337 - main - INFO - 應用程式初始化完成
+2025-06-21 22:23:12,364 - main - INFO - 主視窗已顯示
+2025-06-21 22:27:19,904 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:27:20,582 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:27:20,583 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:27:20,606 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 22:27:20,606 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 22:27:20,615 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:27:20,616 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:27:20,617 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:27:20,617 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:27:20,617 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:27:20,617 - main - INFO - 應用程式初始化完成
+2025-06-21 22:27:22,653 - main - INFO - 主視窗已顯示
+2025-06-21 22:30:13,807 - main - INFO - 正在初始化 YOLO-PCB GUI 應用程式...
+2025-06-21 22:30:14,498 - yolo_gui_utils.config_manager - INFO - 載入配置檔案: config.json
+2025-06-21 22:30:14,499 - yolo_gui_utils.config_manager - INFO - 配置檔案載入成功
+2025-06-21 22:30:14,525 - gui.main_window - INFO - 頁籤信號連接完成
+2025-06-21 22:30:14,525 - gui.main_window - INFO - 功能頁籤初始化完成
+2025-06-21 22:30:14,534 - gui.main_window - INFO - 選單列初始化完成
+2025-06-21 22:30:14,535 - gui.main_window - INFO - 工具列初始化完成
+2025-06-21 22:30:14,535 - gui.main_window - INFO - 狀態列初始化完成
+2025-06-21 22:30:14,535 - gui.main_window - INFO - 設定載入完成
+2025-06-21 22:30:14,535 - gui.main_window - INFO - 主視窗初始化完成
+2025-06-21 22:30:14,535 - main - INFO - 應用程式初始化完成
+2025-06-21 22:30:16,569 - main - INFO - 主視窗已顯示
+2025-06-21 22:30:24,311 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:24,692 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:25,693 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:26,694 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:27,770 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:28,696 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:36,613 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:37,606 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:38,604 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:39,603 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:30:40,606 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
+2025-06-21 22:31:21,806 - utils.torch_utils - INFO - Model Summary: 224 layers, 7067395 parameters, 0 gradients, 16.3 GFLOPS
